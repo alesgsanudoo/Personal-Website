@@ -5,11 +5,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
     Email, EmojiPeople, Instagram, LibraryBooks, Link, LinkedIn, Science, TextSnippet, Work
 } from "@mui/icons-material";
+import {Glow, GlowCapture} from "@codaworks/react-glow";
 
 export default function Home() {
     const [hoveredItem, setHoveredItem] = useState(null);
     const [activeSection, setActiveSection] = useState(null);
-    const [experienceHover, setExperienceHover] = useState(false);
+    const [experienceHover, setExperienceHover] = useState(null);
     const sectionsRef = useRef([]);
 
     const handleMouseEnter = (index) => {
@@ -19,6 +20,16 @@ export default function Home() {
     const handleMouseLeave = () => {
         setHoveredItem(null);
     };
+
+    const handleExpHover = (index) => {
+        setExperienceHover(index);
+        setActiveSection('experience')
+    };
+
+    const handleExpLeave = () => {
+        setExperienceHover(null);
+    };
+
 
     const menuItems = [
         {
@@ -67,7 +78,7 @@ export default function Home() {
             place: 'The Julian Center',
             desc: 'Received and redistributed donated items for resale: This role directly supports the center’s mission to help victims of domestic abuse.',
             skills: ['Customer Service'],
-            link: ''
+            link: 'https://www.juliancenter.org/thrifty-threads/'
         },
         {
             dateFrom: '2016',
@@ -76,7 +87,7 @@ export default function Home() {
             place: 'Self-employed',
             desc: 'Designed and developed game add-ons, enhancing the gaming experience for hundreds of online players around the world.',
             skills: ['MySQl', 'CSS', 'Html', 'MariaDB', 'Product Development', 'Java'],
-            link: ''
+            link: 'https://www.minecraft.net/en-us'
         }
     ]
 
@@ -148,7 +159,6 @@ export default function Home() {
     return (
 
         <main className="flex flex-col lg:flex-row min-h-screen">
-
             {/* Information displayed in left side */}
             <div
                 className="w-full lg:w-6/12 lg:h-screen bg-gradient-to-r from-black-500 to-gray-800 p-4 lg:sticky lg:top-0">
@@ -190,7 +200,7 @@ export default function Home() {
                                         onMouseLeave={handleMouseLeave}
                                     >
                                         <a href={item.link !== null ? item.link : `#${item.target}`}
-                                           className={`w-full h-full flex items-center justify-center ${hoveredItem === index || ( !hoveredItem && activeSection === item.target) ? 'opacity-90' : 'opacity-50'}`}>
+                                           className={`w-full h-full flex items-center justify-center ${hoveredItem === index || (!hoveredItem && activeSection === item.target) ? 'opacity-90' : 'opacity-50'}`}>
                                             <div
                                                 className={`absolute select-none top-[-40px] bg-black bg-opacity-50 text-white font-bold text-sm px-4 py-2 rounded-lg ${hoveredItem === index || (activeSection === item.target) ? 'visible' : 'invisible'}`}
                                             >
@@ -251,48 +261,56 @@ export default function Home() {
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         Experience
                     </h1>
-                    <ul className="mr-20 space-y-4">
-                        {experienceItems.map((item, index) => (<li
-                            key={index}
-                            className={`bg-gray border rounded-lg shadow`}
-                        >
-                            <div className="flex flex-row">
-                                <h3 className="text-sm w-64 mr-2 ml-4 pt-4 leading-normal select-none text-opacity-25">{item.dateFrom} — {item.dateTo}</h3>
-                                <div className="flex flex-col items-center">
-                                    <div className="flex flex-col justify-between p-4 leading-normal">
-                                        <h5 className="mb-2 text-md font-bold tracking-normal text-white lg:hover:text-blue-400">
-                                            {item.position} ⋅ {item.place}
-                                        </h5>
-                                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-pretty">{item.desc}</p>
-                                        <div className="w-full">
-                                            <div className="flex flex-wrap -mx-1">
-                                                {item.skills.map((skill, index) => (
-                                                    <span
-                                                        key={skill}
-                                                        className={` m-1 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2"`}
-                                                    >{skill}
+                    <GlowCapture>
+                        <ul className="mr-20 space-y-4">
+                            {experienceItems.map((item, index) => (<li
+                                key={index}
+                                className={`bg-gray rounded-lg shadow hover:shadow-lg glow:text-glow/50`}
+                                onMouseEnter={() => {
+                                    handleExpHover(index);
+                                }}
+                                onMouseLeave={handleExpLeave}
+                            >
+                                <Glow color='white'>
+                                    <div className={`flex flex-row glow:opacity-100 glow:text-glow/100`}>
+                                        <h3 className="text-sm w-64 mr-2 ml-4 pt-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
+                                        <div className="flex flex-col items-center glow:text-glow">
+                                            <div className={`flex flex-col justify-between p-4 leading-normal ${experienceHover === index ? 'opacity-100' : 'opacity-50' } glow:opacity-100 glow:text-glow/50`}>
+                                                <h5 className={`mb-2 text-md font-bold tracking-normal ${experienceHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
+                                                    {item.position} ⋅ {item.place}
+                                                </h5>
+                                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-pretty glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <div className="w-full glow:text-glow">
+                                                    <div className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
+                                                        {item.skills.map((skill) => (
+                                                            <span
+                                                                key={skill}
+                                                                className={` m-1 inline-block ${experienceHover === index ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
+                                                            >{skill}
                                             </span>
-                                                ))
-                                                }
+                                                        ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <a href={item.link} className={`mt-5 inline-flex items-center ${experienceHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                         fill="currentColor" className="size-4">
+                                                        <path fillRule="evenodd"
+                                                              d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                                              clipRule="evenodd"/>
+                                                        <path fillRule="evenodd"
+                                                              d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                                              clipRule="evenodd"/>
+                                                    </svg>
+                                                    View Page
+                                                </a>
                                             </div>
                                         </div>
-                                        <h3 className="mt-5 inline-flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                 fill="currentColor" className="size-4">
-                                                <path fillRule="evenodd"
-                                                      d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
-                                                      clipRule="evenodd"/>
-                                                <path fillRule="evenodd"
-                                                      d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
-                                                      clipRule="evenodd"/>
-                                            </svg>
-                                            View repository
-                                        </h3>
                                     </div>
-                                </div>
-                            </div>
-                        </li>))}
-                    </ul>
+                                </Glow>
+                            </li>))}
+                        </ul>
+                    </GlowCapture>
 
                 </section>
                 <section id="projects" className="mt-20" ref={el => sectionsRef.current[2] = el}>
