@@ -16,6 +16,9 @@ module.exports = {
         'none': 'none',
         'blur': 'blur(50px)',
       },
+      screens: {
+        'lg': '1440px',
+      },
     },
   },
   plugins: [],
