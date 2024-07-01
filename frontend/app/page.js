@@ -11,6 +11,7 @@ export default function Home() {
     const [hoveredItem, setHoveredItem] = useState(null);
     const [activeSection, setActiveSection] = useState(null);
     const [experienceHover, setExperienceHover] = useState(null);
+    const [projectHover, setProjectHover] = useState(null);
     const sectionsRef = useRef([]);
 
     const handleMouseEnter = (index) => {
@@ -28,6 +29,15 @@ export default function Home() {
 
     const handleExpLeave = () => {
         setExperienceHover(null);
+    };
+
+    const handleProjHover = (index) => {
+        setProjectHover(index);
+        setActiveSection('projects')
+    };
+
+    const handleProjLeave = () => {
+        setProjectHover(null);
     };
 
 
@@ -85,10 +95,41 @@ export default function Home() {
             dateTo: '2020',
             position: 'Minecraft Developer',
             place: 'Self-employed',
-            desc: 'Designed and developed game add-ons, enhancing the gaming experience for hundreds of online players around the world.',
+            desc: 'Designed and developed in-game add-ons, servers, enhancing the gaming experience for over 10.000 of online players around the world.',
             skills: ['MySQl', 'CSS', 'Html', 'MariaDB', 'Product Development', 'Java'],
             link: 'https://www.minecraft.net/en-us'
         }
+    ]
+
+
+    const projectsItems = [
+        {
+            imageUrl: 'https://camo.githubusercontent.com/e90b9174d66add0b2211af7d438331882bb4764317741cddc2b44517b15c6fdb/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
+            imageOptions: 'object-cover',
+            date: 'June 2024',
+            Name: 'Personal Website V2',
+            desc: 'Pending',
+            skills: ['React', 'Next.js', 'JavaScript', 'TailwindCSS'],
+            link: 'https://www.juliancenter.org/thrifty-threads/'
+        },
+        {
+            imageUrl: 'https://camo.githubusercontent.com/e90b9174d66add0b2211af7d438331882bb4764317741cddc2b44517b15c6fdb/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
+            imageOptions: 'object-cover',
+            date: 'May 2024',
+            Name: 'SnapBattle',
+            desc: 'SnapBattle is an innovative mobile application designed to keep friend groups connected through the fun and engaging activity of photo-sharing based on daily prompts. ',
+            skills: ['React Native', 'Node.js', 'JavaScript', 'Cloud Firestore', 'Socket', 'OpenAI API'],
+            link: 'https://www.juliancenter.org/thrifty-threads/'
+        },
+        {
+            imageUrl: 'https://camo.githubusercontent.com/587d48b8e6f19d1e562c4e8510dce16471229914ec9f362d4ae14f5613cf42ae/68747470733a2f2f692e696d6775722e636f6d2f375a4b6d6d57432e706e67',
+            imageOptions: 'object-cover object-left',
+            date: 'June 2023',
+            Name: 'MyBetterCSPlan',
+            desc: 'MyBetterCSPlan is a MERN web app developed as a summer project to assist Purdue CS students in planning their 4-year academic journey.',
+            skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'MongoDB'],
+            link: 'https://www.juliancenter.org/thrifty-threads/'
+        },
     ]
 
 
@@ -242,12 +283,15 @@ export default function Home() {
             </div>
 
             {/* Information displayed in right side */}
-            <div className="w-full lg:w-6/12 p-4 lg:scroll-smooth">
-                <section id="about" className="lg:mt-20" ref={el => sectionsRef.current[0] = el}>
+            <div className="w-full lg:w-6/12 p-4 scroll-smooth">
+
+                {/* about */}
+                <section id="about"  className="lg:mt-20"  ref={el => sectionsRef.current[0] = el}
+                >
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         About me
                     </h1>
-                    <h3 className="lg:mr-20">
+                    <h3 className="lg:mr-20" >
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -257,15 +301,17 @@ export default function Home() {
                         Lorem Ipsum
                     </h3>
                 </section>
+
+                {/* experience */}
                 <section id="experience" className="mt-20" ref={el => sectionsRef.current[1] = el}>
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         Experience
                     </h1>
                     <GlowCapture>
-                        <ul className="mr-20 space-y-4">
+                        <ul className="lg:mr-20 space-y-4">
                             {experienceItems.map((item, index) => (<li
                                 key={index}
-                                className={`bg-gray rounded-lg shadow hover:shadow-lg glow:text-glow/50`}
+                                className={`bg-gray rounded-lg hover:shadow-lg glow:text-glow/50`}
                                 onMouseEnter={() => {
                                     handleExpHover(index);
                                 }}
@@ -279,7 +325,7 @@ export default function Home() {
                                                 <h5 className={`mb-2 text-md font-bold tracking-normal ${experienceHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
                                                     {item.position} ⋅ {item.place}
                                                 </h5>
-                                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-pretty glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
                                                     <div className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
                                                         {item.skills.map((skill) => (
@@ -310,37 +356,100 @@ export default function Home() {
                                 </Glow>
                             </li>))}
                         </ul>
+                        <Glow color={"white"}>
+                            <a href={"#"}
+                               className={`mt-5 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                     fill="currentColor" className="size-4">
+                                    <path fillRule="evenodd"
+                                          d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                          clipRule="evenodd"/>
+                                    <path fillRule="evenodd"
+                                          d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                                View full Resume
+                            </a>
+                        </Glow>
                     </GlowCapture>
 
                 </section>
-                <section id="projects" className="mt-20" ref={el => sectionsRef.current[2] = el}>
+
+                {/* projects */}
+                <section id="projects" className="mt-[225px]" ref={el => sectionsRef.current[2] = el}>
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         Projects
                     </h1>
-                    <h3 className="lg:mr-20">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                    </h3>
+                    <GlowCapture>
+                        <ul className="lg:mr-20 space-y-4">
+                            {projectsItems.map((item, index) => (<li
+                                key={index}
+                                className={`bg-gray rounded-lg hover:shadow-lg glow:text-glow/50`}
+                                onMouseEnter={() => {
+                                    handleProjHover(index);
+                                }}
+                                onMouseLeave={handleProjLeave}
+                            >
+                                <Glow color='white'>
+                                    <div className={`flex flex-row glow:opacity-100 glow:text-glow/100`}>
+                                        <img
+                                            className={`${item.imageOptions} w-full rounded-t-lg h-96 ${projectHover === index ? 'opacity-70' : 'opacity-50'} md:h-auto md:w-48 md:rounded-none md:rounded-s-lg glow:opacity-100 glow:text-glow/100`}
+                                            src={item.imageUrl} alt=""/>
+                                        <div className="flex flex-col items-center glow:text-glow">
+                                            <div
+                                                className={`flex flex-col justify-between p-4 leading-normal ${projectHover === index ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
+                                                <h5 className={`text-md font-bold tracking-normal ${projectHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
+                                                    {item.Name}
+                                                </h5>
+                                                <p className="text-sm italic mb-2">{item.date}</p>
+                                                <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <div className="w-full glow:text-glow">
+                                                    <div
+                                                        className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
+                                                        {item.skills.map((skill) => (
+                                                            <span
+                                                                key={skill}
+                                                                className={` m-1 inline-block ${projectHover === index ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
+                                                            >{skill}
+                                            </span>
+                                                        ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <a href={item.link}
+                                                   className={`mt-5 inline-flex items-center ${projectHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                         fill="currentColor" className="size-4">
+                                                        <path fillRule="evenodd"
+                                                              d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                                              clipRule="evenodd"/>
+                                                        <path fillRule="evenodd"
+                                                              d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                                              clipRule="evenodd"/>
+                                                    </svg>
+                                                    View Repository
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Glow>
+                            </li>))}
+                        </ul>
+                        <Glow color={"white"}>
+                            <a href={"/projects"}
+                               className={`mt-5 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>
+                                </svg>
+                                More repositories
+                            </a>
+                        </Glow>
+                    </GlowCapture>
                 </section>
+
+                {/* blog */}
                 <section id="blog" className="mt-20" ref={el => sectionsRef.current[3] = el}>
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         Blogs
@@ -369,6 +478,8 @@ export default function Home() {
                         Lorem Ipsum
                     </h3>
                 </section>
+
+                {/* contact */}
                 <section id="contact" className="mt-20" ref={el => sectionsRef.current[4] = el}>
                     <h1 className="text-6xl font-bold mb-5 lg:hidden">
                         Contact Me
@@ -397,6 +508,9 @@ export default function Home() {
                         Lorem Ipsum
                     </h3>
                 </section>
+
+
+                {/* Footer 2 */}
                 <section className="mt-16">
                     <h1 className="text-6xl font-bold">
                         Footer
