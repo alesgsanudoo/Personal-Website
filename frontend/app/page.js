@@ -133,10 +133,16 @@ export default function Home() {
     ]
 
 
+
+
     useEffect(() => {
+
+        let height = 600;
+
         const observerOptions = {
-            root: null, rootMargin: "0px", threshold: 0.9
+            root: null, rootMargin: "0px", threshold: height < 1024 ? height <= 600 ? 0.2 : 0.9 : 0.9
         };
+
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -208,16 +214,16 @@ export default function Home() {
                     <img
                         src="/picture.png"
                         alt="Profile picture"
-                        className="w-96"
+                        className="w-64 xl:w-96"
                     />
                     {/* My name */}
-                    <h1 className="text-6xl font-bold">
+                    <h1 className="text-4xl lg:text-3xl xl:text-6xl font-bold">
                         <span
                             className="bg-gradient-to-r from-blue-500 to-blue-50 text-transparent bg-clip-text select-none">Alejandro </span>
                         <span className="text-white select-none">Griffith </span>
                     </h1>
                     {/* Description */}
-                    <h2 className="text-2xl font-bold select-none">
+                    <h2 className="text-xl md:text-xl lg:text-2xl text-center md:text-center lg:text-center xl:text-left font-bold select-none">
                         <span> I am Computer Science Student at </span>
                         <a href="https://www.purdue.edu" className="mt-4">
                             <span
@@ -227,7 +233,7 @@ export default function Home() {
 
                     {/* Nav */}
                     <div
-                        className={`hidden shadow-xl lg:visible lg:flex lg:w-[400px] lg:h-[80px] lg:bg-gradient-to-r ${getGradientClass()} lg:rounded-[16px] lg:mt-20`}>
+                        className={`hidden lg:flex lg:shadow-xl lg:w-[400px] lg:h-[80px] lg:bg-gradient-to-r ${getGradientClass()} lg:rounded-[16px] mt-10 xl:mt-20`}>
                         <div className="lg:h-[75px] lg:w-[390px] lg:m-auto lg:bg-black lg:rounded-[16px]">
                             <div
                                 className="lg:h-[75px] lg:w-[390px] lg:m-auto lg:bg-gray-600 lg:bg-opacity-25  lg:backdrop-blur-md lg:rounded-[16px]">
@@ -243,7 +249,7 @@ export default function Home() {
                                         <a href={item.link !== null ? item.link : `#${item.target}`}
                                            className={`w-full h-full flex items-center justify-center ${hoveredItem === index || (!hoveredItem && activeSection === item.target) ? 'opacity-90' : 'opacity-50'}`}>
                                             <div
-                                                className={`absolute select-none top-[-40px] bg-black bg-opacity-50 text-white font-bold text-sm px-4 py-2 rounded-lg ${hoveredItem === index || (activeSection === item.target) ? 'visible' : 'invisible'}`}
+                                                className={`absolute select-none top-[-30px] xl:top-[-40px] bg-black bg-opacity-50 text-white font-bold text-[8px] xl:text-sm px-4 py-2 rounded-lg ${hoveredItem === index || (activeSection === item.target) ? 'visible' : 'invisible'}`}
                                             >
                                                 {item.label}
                                             </div>
@@ -283,15 +289,17 @@ export default function Home() {
             </div>
 
             {/* Information displayed in right side */}
-            <div className="w-full lg:w-6/12 p-4 scroll-smooth">
+            <div className="lg:w-6/12 scroll-smooth">
 
                 {/* about */}
-                <section id="about"  className="lg:mt-20"  ref={el => sectionsRef.current[0] = el}
+                <section id="about" className="lg:mt-20" ref={el => sectionsRef.current[0] = el}
                 >
-                    <h1 className="text-6xl font-bold mb-5 lg:hidden">
-                        About me
-                    </h1>
-                    <h3 className="lg:mr-20" >
+                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
+                            About me
+                        </h1>
+                    </div>
+                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -304,11 +312,13 @@ export default function Home() {
 
                 {/* experience */}
                 <section id="experience" className="mt-20" ref={el => sectionsRef.current[1] = el}>
-                    <h1 className="text-6xl font-bold mb-5 lg:hidden">
-                        Experience
-                    </h1>
+                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
+                            Experience
+                        </h1>
+                    </div>
                     <GlowCapture>
-                        <ul className="lg:mr-20 space-y-4">
+                        <ul className="lg:mr-20 space-y-4 pr-4 pl-4">
                             {experienceItems.map((item, index) => (<li
                                 key={index}
                                 className={`bg-gray rounded-lg hover:shadow-lg glow:text-glow/50`}
@@ -319,15 +329,18 @@ export default function Home() {
                             >
                                 <Glow color='white'>
                                     <div className={`flex flex-row glow:opacity-100 glow:text-glow/100`}>
-                                        <h3 className="text-sm w-64 mr-2 ml-4 pt-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
-                                        <div className="flex flex-col items-center glow:text-glow">
-                                            <div className={`flex flex-col justify-between p-4 leading-normal ${experienceHover === index ? 'opacity-100' : 'opacity-50' } glow:opacity-100 glow:text-glow/50`}>
+                                        <h3 className="hidden md:block lg:block text-sm w-64 mr-2 ml-4 pt-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
+                                        <div className="flex flex-col items-center lg:glow:text-glow">
+                                            <div
+                                                className={`flex flex-col justify-between pt-4 pr-4 pb-4 leading-normal ${experienceHover === index ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
                                                 <h5 className={`mb-2 text-md font-bold tracking-normal ${experienceHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
                                                     {item.position} ⋅ {item.place}
                                                 </h5>
+                                                <h3 className="md:hidden lg:hidden block text-sm w-64 mb-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
                                                 <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
-                                                    <div className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
+                                                    <div
+                                                        className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
                                                         {item.skills.map((skill) => (
                                                             <span
                                                                 key={skill}
@@ -338,7 +351,8 @@ export default function Home() {
                                                         }
                                                     </div>
                                                 </div>
-                                                <a href={item.link} className={`mt-5 inline-flex items-center ${experienceHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                <a href={item.link}
+                                                   className={`mt-5 inline-flex items-center ${experienceHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                                          fill="currentColor" className="size-4">
                                                         <path fillRule="evenodd"
@@ -358,7 +372,7 @@ export default function Home() {
                         </ul>
                         <Glow color={"white"}>
                             <a href={"#"}
-                               className={`mt-5 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                               className={`mt-5 pr-4 pl-4 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                      fill="currentColor" className="size-4">
                                     <path fillRule="evenodd"
@@ -377,11 +391,13 @@ export default function Home() {
 
                 {/* projects */}
                 <section id="projects" className="mt-[225px]" ref={el => sectionsRef.current[2] = el}>
-                    <h1 className="text-6xl font-bold mb-5 lg:hidden">
-                        Projects
-                    </h1>
+                    <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
+                            Projects
+                        </h1>
+                    </div>
                     <GlowCapture>
-                        <ul className="lg:mr-20 space-y-4">
+                        <ul className="lg:mr-20 space-y-4 pr-4 pl-4">
                             {projectsItems.map((item, index) => (<li
                                 key={index}
                                 className={`bg-gray rounded-lg hover:shadow-lg glow:text-glow/50`}
@@ -391,7 +407,8 @@ export default function Home() {
                                 onMouseLeave={handleProjLeave}
                             >
                                 <Glow color='white'>
-                                    <div className={`flex flex-row glow:opacity-100 glow:text-glow/100`}>
+                                    <div
+                                        className={`flex flex-col md:flex-row lg:flex-row xl:flex-row glow:opacity-100 glow:text-glow/100`}>
                                         <img
                                             className={`${item.imageOptions} w-full rounded-t-lg h-96 ${projectHover === index ? 'opacity-70' : 'opacity-50'} md:h-auto md:w-48 md:rounded-none md:rounded-s-lg glow:opacity-100 glow:text-glow/100`}
                                             src={item.imageUrl} alt=""/>
@@ -437,7 +454,7 @@ export default function Home() {
                         </ul>
                         <Glow color={"white"}>
                             <a href={"/projects"}
-                               className={`mt-5 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                               className={`mt-5 pr-4 pl-4 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -451,10 +468,12 @@ export default function Home() {
 
                 {/* blog */}
                 <section id="blog" className="mt-20" ref={el => sectionsRef.current[3] = el}>
-                    <h1 className="text-6xl font-bold mb-5 lg:hidden">
-                        Blogs
-                    </h1>
-                    <h3 className="lg:mr-20">
+                    <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
+                            Blogs
+                        </h1>
+                    </div>
+                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -481,10 +500,12 @@ export default function Home() {
 
                 {/* contact */}
                 <section id="contact" className="mt-20" ref={el => sectionsRef.current[4] = el}>
-                    <h1 className="text-6xl font-bold mb-5 lg:hidden">
-                        Contact Me
-                    </h1>
-                    <h3 className="lg:mr-20">
+                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
+                            Contact Me
+                        </h1>
+                    </div>
+                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -511,7 +532,7 @@ export default function Home() {
 
 
                 {/* Footer 2 */}
-                <section className="mt-16">
+                <section className="mt-16 pr-4 pl-4">
                     <h1 className="text-6xl font-bold">
                         Footer
                     </h1>
