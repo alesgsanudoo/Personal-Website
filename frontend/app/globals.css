@@ -34,6 +34,27 @@
   border-radius: 5px;
 }
 
+
+.scrollbar-blog::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+.scrollbar-blog::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+.scrollbar-blog::-webkit-scrollbar-thumb {
+  height: 1px;
+  background: linear-gradient(
+          to bottom,
+          rgb(255 251 235),
+          rgb(245 158 11));
+  border-radius: 5px;
+}
+
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
