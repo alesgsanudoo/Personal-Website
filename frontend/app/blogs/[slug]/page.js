@@ -12,17 +12,15 @@ function getPostContent(slug) {
         const folder = 'blogs/';
         const file = folder + `${slug}.md`;
         const content = fs.readFileSync(file, 'utf8');
-        let data = matter(content);
-        return data;
+        return matter(content);
     } catch (e) {
         redirect('/404');
     }
 }
 
-
 const postsDirectory = path.join(process.cwd(), 'blogs');
 
-export function getAllPosts() {
+function getAllPosts() {
     const filenames = fs.readdirSync(postsDirectory);
     return filenames.map((filename) => {
         const filePath = path.join(postsDirectory, filename);
@@ -36,7 +34,6 @@ export function getAllPosts() {
         };
     });
 }
-
 
 
 export const generateStaticParams = async () => {
@@ -56,6 +53,7 @@ export default function postPage(props) {
     const slug = props.params.slug;
     const post = getPostContent(slug);
     const posts = getAllPosts();
+    let hover = 0;
 
     const otherPosts = posts.filter((item) => item.slug !== slug)
 
@@ -83,7 +81,9 @@ export default function postPage(props) {
                     <Markdown>{post.content}</Markdown>
                 </div>
                 <GlowCapture>
-                    <ul className="mt-20 flex overflow-x-auto space-x-10 scrollbar-blog scroll-my-20 snap-mandatory snap-x">
+                    <h4 className="mt-20 mb-2 text-3xl font-bold tracking-tight text-gray-900  bg-gradient-to-r from-blue-500 to-blue-50 text-transparent bg-clip-text select-none">Other
+                        Blogs</h4>
+                    <ul className="flex ml-4 mt-3 overflow-x-auto space-x-10 scrollbar-blog scroll-my-20 snap-mandatory snap-x">
                         {otherPosts.map((item, index) => (
                             <li
                                 key={index}

@@ -6,13 +6,16 @@ import {
     Email, EmojiPeople, Instagram, LibraryBooks, Link, LinkedIn, Science, TextSnippet, Work
 } from "@mui/icons-material";
 import {Glow, GlowCapture} from "@codaworks/react-glow";
+import path from "path";
 
 export default function Home() {
     const [hoveredItem, setHoveredItem] = useState(null);
     const [activeSection, setActiveSection] = useState(null);
     const [experienceHover, setExperienceHover] = useState(null);
     const [projectHover, setProjectHover] = useState(null);
+    const [blogHover, setBlogHover] = useState(null);
     const sectionsRef = useRef([]);
+    const [blogs, setBlogs] = useState([]);
 
     const handleMouseEnter = (index) => {
         setHoveredItem(index);
@@ -39,6 +42,17 @@ export default function Home() {
     const handleProjLeave = () => {
         setProjectHover(null);
     };
+
+
+    const handleBlogHover = (index) => {
+        setBlogHover(index);
+        setActiveSection('blog');
+    };
+
+    const handleBlogLeave = () => {
+        setBlogHover(null);
+    };
+
 
 
     const menuItems = [
@@ -164,6 +178,18 @@ export default function Home() {
         };
     }, []);
 
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const res = await fetch('/api/blogs');
+            const data = await res.json();
+            setBlogs(data);
+        };
+
+        fetchPosts().then(r => console.log("Blogs fetched."));
+    }, []);
+
+
     const getGradientClass = () => {
         if (hoveredItem !== null) {
             console.log(hoveredItem);
@@ -201,7 +227,6 @@ export default function Home() {
                 return 'from-blue-700 from-16% via-blue-600 via-32% via-blue-500 via-48% via-blue-400 via-64% via-blue-300 via-80% via-blue-300 to-96% to-gray-900 shadow-blue-700/50';
         }
     };
-
 
     return (
 
@@ -337,7 +362,7 @@ export default function Home() {
                                                     {item.position} ⋅ {item.place}
                                                 </h5>
                                                 <h3 className="md:hidden lg:hidden block text-sm w-64 mb-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
-                                                <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <p className="mb-3 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
                                                     <div
                                                         className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
@@ -390,7 +415,7 @@ export default function Home() {
                 </section>
 
                 {/* projects */}
-                <section id="projects" className="mt-[225px]" ref={el => sectionsRef.current[2] = el}>
+                <section id="projects" className="mt-[220px]" ref={el => sectionsRef.current[2] = el}>
                     <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Projects
@@ -419,7 +444,7 @@ export default function Home() {
                                                     {item.Name}
                                                 </h5>
                                                 <p className="text-sm italic mb-2">{item.date}</p>
-                                                <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <p className="mb-3 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
                                                     <div
                                                         className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
@@ -467,35 +492,50 @@ export default function Home() {
                 </section>
 
                 {/* blog */}
-                <section id="blog" className="mt-20" ref={el => sectionsRef.current[3] = el}>
+                <section id="blog" className="mt-[200px]" ref={el => sectionsRef.current[3] = el}>
                     <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Blogs
                         </h1>
                     </div>
-                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                    </h3>
+                    <GlowCapture>
+                        <ul className="flex lg:mr-20 flex-col ml-4 mt-3">
+                            {blogs.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className={`mb-5 snap-center bg-gray rounded-lg hover:shadow-lg glow:text-glow/50`}
+                                    onMouseEnter={() => {
+                                        handleBlogHover(index);
+                                    }}
+                                    onMouseLeave={handleBlogLeave}
+                                >
+                                    <Glow color='white'>
+                                        <div
+                                            className={`glow:opacity-100 glow:text-glow glow:text-glow/100 ${blogHover === index ? 'opacity-100' : 'opacity-50'}`}>
+                                            <a href="#">
+                                                <h5 className={`mb-2 text-2xl font-bold tracking-tight ${blogHover === index ? 'text-blue-400 opacity-70' : 'text-white'} glow:opacity-100 glow:text-glow/50`}>{item.data.title}</h5>
+                                            </a>
+                                            <p className="text-clip mb-3 font-normal text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.data.date}</p>
+                                            <p className="mb-3 mr-4 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.content}</p>
+                                            <a href={"/blogs/" + item.data.link}
+                                               className={`mt-2 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                                     fill="currentColor" className="size-4">
+                                                    <path fillRule="evenodd"
+                                                          d="M8.914 6.025a.75.75 0 0 1 1.06 0 3.5 3.5 0 0 1 0 4.95l-2 2a3.5 3.5 0 0 1-5.396-4.402.75.75 0 0 1 1.251.827 2 2 0 0 0 3.085 2.514l2-2a2 2 0 0 0 0-2.828.75.75 0 0 1 0-1.06Z"
+                                                          clipRule="evenodd"/>
+                                                    <path fillRule="evenodd"
+                                                          d="M7.086 9.975a.75.75 0 0 1-1.06 0 3.5 3.5 0 0 1 0-4.95l2-2a3.5 3.5 0 0 1 5.396 4.402.75.75 0 0 1-1.251-.827 2 2 0 0 0-3.085-2.514l-2 2a2 2 0 0 0 0 2.828.75.75 0 0 1 0 1.06Z"
+                                                          clipRule="evenodd"/>
+                                                </svg>
+                                                Read more
+                                            </a>
+                                        </div>
+                                    </Glow>
+                                </li>
+                            ))}
+                        </ul>
+                    </GlowCapture>
                 </section>
 
                 {/* contact */}
