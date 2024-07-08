@@ -80,8 +80,9 @@ export default function postPage(props) {
                 <div className="mt-10 scroll-smooth">
                     <Markdown>{post.content}</Markdown>
                 </div>
+                {otherPosts.length > 0 ?
                 <GlowCapture>
-                    <h4 className="mt-20 mb-2 text-3xl font-bold tracking-tight text-gray-900  bg-gradient-to-r from-blue-500 to-blue-50 text-transparent bg-clip-text select-none">Other
+                        <h4 className="mt-20 mb-2 text-3xl font-bold tracking-tight text-gray-900  bg-gradient-to-r from-blue-500 to-blue-50 text-transparent bg-clip-text select-none">Other
                         Blogs</h4>
                     <ul className="flex ml-4 mt-3 overflow-x-auto space-x-10 scrollbar-blog scroll-my-20 snap-mandatory snap-x">
                         {otherPosts.map((item, index) => (
@@ -96,7 +97,7 @@ export default function postPage(props) {
                                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.data.title}</h5>
                                         </a>
                                         <p className="text-clip mb-3 font-normal text-gray-700 dark:text-gray-400">{item.data.date}</p>
-                                        <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.content}</p>
+                                        <p className="mb-3 font-normal text-justify text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.data.smdesc}</p>
                                         <a href={"/blogs/" + item.data.link}
                                            className={`mt-2 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed glow:opacity-100 glow:text-glow/50 select-none`}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
@@ -116,6 +117,9 @@ export default function postPage(props) {
                         ))}
                     </ul>
                 </GlowCapture>
+                :
+                    <h4 className="mt-20 mb-2 text-2xl font-bold tracking-tight text-gray-900  bg-gradient-to-r from-blue-900 to-blue-50 text-transparent bg-clip-text select-none">No
+                        Other blogs published</h4>}
             </div>
             {/* footer */}
 

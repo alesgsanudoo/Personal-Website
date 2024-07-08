@@ -2,17 +2,21 @@
 title: "First Blog"
 date: 'Wed 2, July 2024'
 link: 'firstBlog'
+smdesc: 'Hey there, welcome to my blog! Here, I’ll be sharing my thoughts, curiosities, and intriguing experiences. Whether somethings on my mind, challenging me, or just plain interesting, you’ll find it here. '
 ---
 
 
-t is a long established fact that a reader will be distracted by the readable content of a page when looking at its
-layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
-using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page
-editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites
-still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (
-injected humour and the like).
+**Hey there, welcome to my blog!**<br/><br/>
+
+``Here, I’ll be sharing my thoughts, curiosities, and intriguing experiences. Whether something's on
+my mind, challenging me, or just plain interesting, you’ll find it here. I’ll be posting weekly/monthly updates about my journey
+as a Computer Science student at Purdue. Join me as I improve my writing skills and explore new ideas.``
 
 
+
+<br/><br/>Feel free to go through my posts below and enjoy the read!
+<br/>
+**Alex S**
 
 
 

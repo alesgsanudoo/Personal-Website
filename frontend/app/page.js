@@ -54,7 +54,6 @@ export default function Home() {
     };
 
 
-
     const menuItems = [
         {
             icon: <EmojiPeople className="w-full h-full"/>,
@@ -89,7 +88,7 @@ export default function Home() {
             icon: <TextSnippet className="w-full h-full"/>,
             label: "Resume",
             target: "resume",
-            link: 'purdue.edu'
+            link: 'resume'
         }
     ];
 
@@ -118,13 +117,13 @@ export default function Home() {
 
     const projectsItems = [
         {
-            imageUrl: 'https://camo.githubusercontent.com/e90b9174d66add0b2211af7d438331882bb4764317741cddc2b44517b15c6fdb/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
+            imageUrl: 'https://i.imgur.com/soAsIWi.png',
             imageOptions: 'object-cover',
             date: 'June 2024',
             Name: 'Personal Website V2',
-            desc: 'Pending',
+            desc: 'My personal page is a web app designed to showcase who I am, my skills, experience, resume, and fun facts about me. Also, I use my blog to express myself!',
             skills: ['React', 'Next.js', 'JavaScript', 'TailwindCSS'],
-            link: 'https://www.juliancenter.org/thrifty-threads/'
+            link: 'https://www.alesgsanudoo.com/'
         },
         {
             imageUrl: 'https://camo.githubusercontent.com/e90b9174d66add0b2211af7d438331882bb4764317741cddc2b44517b15c6fdb/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
@@ -133,7 +132,7 @@ export default function Home() {
             Name: 'SnapBattle',
             desc: 'SnapBattle is an innovative mobile application designed to keep friend groups connected through the fun and engaging activity of photo-sharing based on daily prompts. ',
             skills: ['React Native', 'Node.js', 'JavaScript', 'Cloud Firestore', 'Socket', 'OpenAI API'],
-            link: 'https://www.juliancenter.org/thrifty-threads/'
+            link: 'https://github.com/CSGrinders/SnapBattle'
         },
         {
             imageUrl: 'https://camo.githubusercontent.com/587d48b8e6f19d1e562c4e8510dce16471229914ec9f362d4ae14f5613cf42ae/68747470733a2f2f692e696d6775722e636f6d2f375a4b6d6d57432e706e67',
@@ -142,11 +141,9 @@ export default function Home() {
             Name: 'MyBetterCSPlan',
             desc: 'MyBetterCSPlan is a MERN web app developed as a summer project to assist Purdue CS students in planning their 4-year academic journey.',
             skills: ['React', 'Node.js', 'Express.js', 'JavaScript', 'MongoDB'],
-            link: 'https://www.juliancenter.org/thrifty-threads/'
+            link: 'https://github.com/MyPurdueCSBetterPlan/bettercsplan'
         },
     ]
-
-
 
 
     useEffect(() => {
@@ -154,7 +151,7 @@ export default function Home() {
         let height = 600;
 
         const observerOptions = {
-            root: null, rootMargin: "0px", threshold: height < 1024 ? height <= 600 ? 0.2 : 0.9 : 0.9
+            root: null, rootMargin: "0px", threshold: 0.25
         };
 
 
@@ -250,7 +247,7 @@ export default function Home() {
                     {/* Description */}
                     <h2 className="text-xl md:text-xl lg:text-2xl text-center md:text-center lg:text-center xl:text-left font-bold select-none">
                         <span> I am Computer Science Student at </span>
-                        <a href="https://www.purdue.edu" className="mt-4">
+                        <a href="https://www.purdue.edu" className="mt-4" target="_blank">
                             <span
                                 className="bg-gradient-to-r from-amber-300 to-amber-500 text-transparent bg-clip-text lg:hover:text-3xl lg:transition-all lg:duration-300 select-none">Purdue University</span>
                         </a>
@@ -290,25 +287,16 @@ export default function Home() {
                     {/* Social Media */}
                     <div
                         className="lg:shadow-xl flex flex-row lg:absolute lg:bottom-5 lg:mb-5 justify-between space-x-12 items-center  mt-10">
-                        <a href="https://github.com/alesgsanudoo">
+                        <a href="https://github.com/alesgsanudoo" target="_blank">
                             <GitHubIcon
                                 className="lg:shadow-xl text-5xl hover:text-blue-400 lg:hover:text-7xl lg:transition-all lg:duration-300"/>
                         </a>
-                        <a href="https://www.linkedin.com/in/alesgsanudoo/"><LinkedIn
+                        <a href="https://www.linkedin.com/in/alesgsanudoo/" target="_blank"><LinkedIn
                             className="lg:shadow-xl text-5xl hover:text-blue-400 lg:hover:text-7xl lg:transition-all lg:duration-300"/>
                         </a>
-                        <a href="https://www.instagram.com/alesgsanudoo_/"><Instagram
+                        <a href="https://www.instagram.com/alesgsanudoo_/" target="_blank"><Instagram
                             className="lg:shadow-xl text-5xl hover:text-blue-400 lg:hover:text-7xl lg:transition-all lg:duration-300"/>
                         </a>
-                    </div>
-
-                    {/* footer */}
-
-                    <div className="invisible lg:absolute lg:bottom-5">
-                        <h1>
-                            Made with love by Alex ❤️!
-                        </h1>
-
                     </div>
                 </div>
             </div>
@@ -319,25 +307,59 @@ export default function Home() {
                 {/* about */}
                 <section id="about" className="lg:mt-20" ref={el => sectionsRef.current[0] = el}
                 >
-                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                    <div
+                        className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             About me
                         </h1>
                     </div>
-                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                    </h3>
+                    <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
+                        <span className="font-bold text-gray-300 hover:text-amber-400">Little did I know, when I touched my first laptop</span>,
+                        that I would become <span
+                        className="font-bold text-gray-300 hover:text-amber-400">passionate</span> about computer
+                        science and project development. My journey began with <span
+                        className="font-bold text-gray-300 hover:text-amber-400">creating Minecraft servers</span>,
+                        <span className="font-bold text-gray-300 hover:text-amber-400"> developing
+                        addons</span>, and <span className="font-bold text-gray-300 hover:text-amber-400">designing websites</span> and <span
+                        className="font-bold text-gray-300 hover:text-amber-400">shops</span> for these servers. After
+                        successfully running several
+                        servers with more than <span className="font-bold text-gray-300 hover:text-amber-400">10,000 players</span>,
+                        I decided to go deeper into computer science.
+                    </p>
+                    <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
+                        Today, I have <span
+                        className="font-bold text-gray-300 hover:text-amber-400">built</span> several <span
+                        className="font-bold text-gray-300 hover:text-amber-400">private</span>, <span
+                        className="font-bold text-gray-300 hover:text-amber-400">public</span>, and <span
+                        className="font-bold text-gray-300 hover:text-amber-400">class projects</span>, some of which
+                        have generated
+                        <span className="font-bold text-gray-300 hover:text-amber-400"> income</span>. Currently, I am
+                        focused on creating <span
+                        className="font-bold text-gray-300 hover:text-amber-400">side projects</span> to showcase my
+                        skills, particularly
+                        using <span className="font-bold text-gray-300 hover:text-amber-400">C++</span>, a language I am
+                        eager to learn more about and thoroughly enjoy programming in.
+                    </p>
+                    <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
+                        When I am not coding, I <span className="font-bold text-gray-300 hover:text-amber-400">enjoy playing any type of sports or games</span>, <span
+                        className="font-bold text-gray-300 hover:text-amber-400">working out</span>,<span
+                        className="font-bold text-gray-300 hover:text-amber-400"> watching series</span>,
+                        <span className="font-bold text-gray-300 hover:text-amber-400"> reading</span>, and <span
+                        className="font-bold text-gray-300 hover:text-amber-400">spending</span> time
+                        with <span className="font-bold text-gray-300 hover:text-amber-400">friends</span> and<span
+                        className="font-bold text-gray-300 hover:text-amber-400"> family</span>.
+                    </p>
+                    <p className="text-gray-400  text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
+                        <span className="font-bold text-gray-300 hover:text-amber-400">Feel free</span> to reach out; I
+                        love <span className="font-bold text-gray-300 hover:text-amber-400">meeting</span> new people
+                        and engaging in conversations.
+                    </p>
                 </section>
 
                 {/* experience */}
-                <section id="experience" className="mt-20" ref={el => sectionsRef.current[1] = el}>
-                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                <section id="experience" className="mt-[150px]" ref={el => sectionsRef.current[1] = el}>
+                    <div
+                        className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Experience
                         </h1>
@@ -362,7 +384,7 @@ export default function Home() {
                                                     {item.position} ⋅ {item.place}
                                                 </h5>
                                                 <h3 className="md:hidden lg:hidden block text-sm w-64 mb-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
-                                                <p className="mb-3 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <p className="mb-3 font-normal text-justify text-gray-300 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
                                                     <div
                                                         className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
@@ -396,7 +418,7 @@ export default function Home() {
                             </li>))}
                         </ul>
                         <Glow color={"white"}>
-                            <a href={"#"}
+                            <a href={"resume"}
                                className={`mt-5 pr-4 pl-4 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed  ${!experienceHover ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                      fill="currentColor" className="size-4">
@@ -415,8 +437,9 @@ export default function Home() {
                 </section>
 
                 {/* projects */}
-                <section id="projects" className="mt-[220px]" ref={el => sectionsRef.current[2] = el}>
-                    <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                <section id="projects" className="mt-[180px]" ref={el => sectionsRef.current[2] = el}>
+                    <div
+                        className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Projects
                         </h1>
@@ -444,7 +467,7 @@ export default function Home() {
                                                     {item.Name}
                                                 </h5>
                                                 <p className="text-sm italic mb-2">{item.date}</p>
-                                                <p className="mb-3 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50">{item.desc}</p>
+                                                <p className="mb-3 font-normal text-justify text-gray-300 glow:opacity-100 glow:text-glow/50">{item.desc}</p>
                                                 <div className="w-full glow:text-glow">
                                                     <div
                                                         className="flex flex-wrap -mx-1 glow:opacity-100 glow:text-glow/50">
@@ -492,8 +515,9 @@ export default function Home() {
                 </section>
 
                 {/* blog */}
-                <section id="blog" className="mt-[200px]" ref={el => sectionsRef.current[3] = el}>
-                    <div className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                <section id="blog" className="mt-[180px]" ref={el => sectionsRef.current[3] = el}>
+                    <div
+                        className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Blogs
                         </h1>
@@ -516,7 +540,7 @@ export default function Home() {
                                                 <h5 className={`mb-2 text-2xl font-bold tracking-tight ${blogHover === index ? 'text-blue-400 opacity-70' : 'text-white'} glow:opacity-100 glow:text-glow/50`}>{item.data.title}</h5>
                                             </a>
                                             <p className="text-clip mb-3 font-normal text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.data.date}</p>
-                                            <p className="mb-3 mr-4 font-normal text-justify text-white glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.content}</p>
+                                            <p className="mb-3 mr-4 font-normal text-justify text-gray-300 glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.data.smdesc}</p>
                                             <a href={"/blogs/" + item.data.link}
                                                className={`mt-2 inline-flex items-center text-blue-400 underline underline-offset-8 hover:decoration-dashed glow:opacity-100 glow:text-glow/50 select-none`}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
@@ -539,43 +563,56 @@ export default function Home() {
                 </section>
 
                 {/* contact */}
-                <section id="contact" className="mt-20" ref={el => sectionsRef.current[4] = el}>
-                    <div className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
-                        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
-                            Contact Me
-                        </h1>
-                    </div>
-                    <h3 className="text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum
-                    </h3>
+                <section id="contact" className="mt-[160px]" ref={el => sectionsRef.current[4] = el}>
+                    <GlowCapture>
+                        <div
+                            className="flex flex-col opacity-100 md:opacity-100 lg:opacity-50 xl:opacity-50 hover:opacity-100 items-center glow:opacity-100 glow:text-glow/50">
+                            <Glow color='orange'>
+                                <h2 className="text-xl md:text-2xl lg:text-4xl text-center font-bold glow:opacity-100 glow:text-glow/50 select-none">
+                                    Do you want to chat with me?
+                                </h2>
+                            </Glow>
+                            <h3 className="mt-4 textxl md:text-2xl lg:text-4xl text-center font-bold bg-gradient-to-r from-amber-300 to-amber-600 text-transparent bg-clip-text select-none glow:opacity-100 glow:text-glow/50">
+                                Let's chat!
+                            </h3>
+                            <div className="mt-10 flex flex-row space-x-10">
+                                <a href="mailto:contact@alesgsanudoo.com" target="_blank"
+                                   className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                                >
+                                <span
+                                    className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                    Email
+                                </span>
+                                </a>
+                                <a href="https://www.linkedin.com/in/alesgsanudoo/" target="_blank"
+                                   className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                                >
+                                <span
+                                    className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                    LinkedIn
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </GlowCapture>
                 </section>
 
 
-                {/* Footer 2 */}
-                <section className="mt-16 pr-4 pl-4">
-                    <h1 className="text-6xl font-bold">
-                        Footer
-                    </h1>
+                {/* Footer */}
+                <section className="flex mb-10 flex-col space-y-2 mt-16 pr-4 pl-4 items-center">
+                    <h2 className="text-gray-500">
+                        Made with love by <span className="text-gray-400 font-bold hover:text-amber-400">Alex</span> ❤️!
+                    </h2>
+                    <h2 className="text-gray-500 text-center">
+                        Built with <a href="https://nextjs.org/" target="_blank"
+                                      className="font-bold hover:text-amber-400">NextJS</a>, <a
+                        href="https://tailwindcss.com/" target="_blank"
+                        className="font-bold hover:text-amber-400">TailwindCSS</a>,
+                        and icons from <a href="https://heroicons.com/" target="_blank"
+                                          className="font-bold hover:text-amber-400">Heroicons</a> and <a
+                        href="https://mui.com/" target="_blank"
+                        className="font-bold hover:text-amber-400">MaterialUI</a>.
+                    </h2>
                 </section>
             </div>
         </main>
