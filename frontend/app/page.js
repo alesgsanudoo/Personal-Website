@@ -145,6 +145,43 @@ export default function Home() {
         },
     ]
 
+    const [stickyHeaders, setStickyHeaders] = useState({
+        about: false,
+        experience: false,
+        projects: false,
+        blog: false,
+    });
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const isSmallOrMedium = window.innerWidth < 1024;
+            if (isSmallOrMedium) {
+                const updatedStickyHeaders = {};
+                sectionsRef.current.forEach((section, index) => {
+                    if (section) { //Sticky header on top
+                        const rect = section.getBoundingClientRect();
+                        const sectionName = section.id;
+                        updatedStickyHeaders[sectionName] = rect.top <= 0;
+                    }
+                });
+                setStickyHeaders(updatedStickyHeaders);
+            } else {
+                setStickyHeaders({
+                    about: false,
+                    experience: false,
+                    projects: false,
+                    blog: false,
+                });
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
 
     useEffect(() => {
 
@@ -308,50 +345,71 @@ export default function Home() {
                 <section id="about" className="lg:mt-20" ref={el => sectionsRef.current[0] = el}
                 >
                     <div
-                        className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        className={`lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4 transition duration-300 ${stickyHeaders.about ? 'bg-opacity-100 text-white' : 'bg-opacity-50 text-gray-300'}`}>
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             About me
                         </h1>
                     </div>
                     <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4">
-                        <span className="font-bold text-gray-300 hover:text-amber-400">Little did I know, when I touched my first laptop</span>,
+                        <span
+                            className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>Little did I know, when I touched my first laptop</span>,
                         that I would become <span
-                        className="font-bold text-gray-300 hover:text-amber-400">passionate</span> about computer
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>passionate</span> about
+                        computer
                         science and project development. My journey began with <span
-                        className="font-bold text-gray-300 hover:text-amber-400">creating Minecraft servers</span>,
-                        <span className="font-bold text-gray-300 hover:text-amber-400"> developing
-                        addons</span>, and <span className="font-bold text-gray-300 hover:text-amber-400">designing websites</span> and <span
-                        className="font-bold text-gray-300 hover:text-amber-400">shops</span> for these servers. After
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>creating Minecraft servers</span>,
+                        <span
+                            className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}> developing
+            addons</span>, and <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>designing websites</span> and <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>shops</span> for
+                        these servers. After
                         successfully running several
-                        servers with more than <span className="font-bold text-gray-300 hover:text-amber-400">10,000 players</span>,
+                        servers with more than <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>10,000 players</span>,
                         I decided to go deeper into computer science.
                     </p>
                     <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
                         Today, I have <span
-                        className="font-bold text-gray-300 hover:text-amber-400">built</span> several <span
-                        className="font-bold text-gray-300 hover:text-amber-400">private</span>, <span
-                        className="font-bold text-gray-300 hover:text-amber-400">public</span>, and <span
-                        className="font-bold text-gray-300 hover:text-amber-400">class projects</span>, some of which
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>built</span> several <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>private</span>, <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>public</span>,
+                        and <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>class projects</span>,
+                        some of which
                         have generated
-                        <span className="font-bold text-gray-300 hover:text-amber-400"> income</span>. Currently, I am
+                        <span
+                            className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}> income</span>.
+                        Currently, I am
                         focused on creating <span
-                        className="font-bold text-gray-300 hover:text-amber-400">side projects</span> to showcase my
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>side projects</span> to
+                        showcase my
                         skills, particularly
-                        using <span className="font-bold text-gray-300 hover:text-amber-400">C++</span>, a language I am
+                        using <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>C++</span>,
+                        a language I am
                         eager to learn more about and thoroughly enjoy programming in.
                     </p>
                     <p className="text-gray-400 text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
-                        When I am not coding, I <span className="font-bold text-gray-300 hover:text-amber-400">enjoy playing any type of sports or games</span>, <span
-                        className="font-bold text-gray-300 hover:text-amber-400">working out</span>,<span
-                        className="font-bold text-gray-300 hover:text-amber-400"> watching series</span>,
-                        <span className="font-bold text-gray-300 hover:text-amber-400"> reading</span>, and <span
-                        className="font-bold text-gray-300 hover:text-amber-400">spending</span> time
-                        with <span className="font-bold text-gray-300 hover:text-amber-400">friends</span> and<span
-                        className="font-bold text-gray-300 hover:text-amber-400"> family</span>.
+                        When I am not coding, I <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>enjoy playing any type of sports or games</span>, <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>working out</span>,<span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}> watching series</span>,
+                        <span
+                            className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}> reading</span>,
+                        and <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>spending</span> time
+                        with <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>friends</span> and<span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}> family</span>.
                     </p>
                     <p className="text-gray-400  text-md md:text-lg lg:text-lg lg:mr-20 pr-4 pl-4 mt-5">
-                        <span className="font-bold text-gray-300 hover:text-amber-400">Feel free</span> to reach out; I
-                        love <span className="font-bold text-gray-300 hover:text-amber-400">meeting</span> new people
+                        <span
+                            className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>Feel free</span> to
+                        reach out; I
+                        love <span
+                        className={`font-bold transition duration-300 ${stickyHeaders.about ? 'text-amber-400' : 'text-gray-300'} hover:text-amber-400`}>meeting</span> new
+                        people
                         and engaging in conversations.
                     </p>
                 </section>
@@ -359,7 +417,8 @@ export default function Home() {
                 {/* experience */}
                 <section id="experience" className="mt-[150px]" ref={el => sectionsRef.current[1] = el}>
                     <div
-                        className="lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        className={`lg:hidden sticky top-0 z-20 bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4 transition duration-300 ${stickyHeaders.experience ? 'bg-opacity-100 text-white' : 'bg-opacity-50 text-gray-300'}`}
+                    >
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Experience
                         </h1>
@@ -379,8 +438,8 @@ export default function Home() {
                                         <h3 className="hidden md:block lg:block text-sm w-64 mr-2 ml-4 pt-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
                                         <div className="flex flex-col items-center lg:glow:text-glow">
                                             <div
-                                                className={`flex flex-col justify-between pt-4 pr-4 pb-4 leading-normal ${experienceHover === index ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
-                                                <h5 className={`mb-2 text-md font-bold tracking-normal ${experienceHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
+                                                className={`flex flex-col justify-between pt-4 pr-4 pb-4 leading-normal transition duration-300 ${experienceHover === index || stickyHeaders.experience ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
+                                                <h5 className={`mb-2 text-md font-bold tracking-normal transition duration-300 ${stickyHeaders.experience ? 'opacity-100 text-blue-400' : experienceHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
                                                     {item.position} ⋅ {item.place}
                                                 </h5>
                                                 <h3 className="md:hidden lg:hidden block text-sm w-64 mb-4 leading-normal select-none opacity-25 text-opacity-25 glow:text-glow/50">{item.dateFrom} — {item.dateTo}</h3>
@@ -391,7 +450,7 @@ export default function Home() {
                                                         {item.skills.map((skill) => (
                                                             <span
                                                                 key={skill}
-                                                                className={` m-1 inline-block ${experienceHover === index ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
+                                                                className={` m-1 inline-block transition duration-300 ${stickyHeaders.experience ? 'bg-blue-400 text-white opacity-100' : experienceHover === index ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
                                                             >{skill}
                                             </span>
                                                         ))
@@ -399,7 +458,7 @@ export default function Home() {
                                                     </div>
                                                 </div>
                                                 <a href={item.link}
-                                                   className={`mt-5 inline-flex items-center ${experienceHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                   className={`mt-5 inline-flex items-center ${experienceHover === index || stickyHeaders.experience ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                                          fill="currentColor" className="size-4">
                                                         <path fillRule="evenodd"
@@ -439,7 +498,7 @@ export default function Home() {
                 {/* projects */}
                 <section id="projects" className="mt-[180px]" ref={el => sectionsRef.current[2] = el}>
                     <div
-                        className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        className={`lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4 transition duration-300 ${stickyHeaders.projects ? 'bg-opacity-100 text-white' : 'bg-opacity-50 text-gray-300'}`}>
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Projects
                         </h1>
@@ -458,12 +517,12 @@ export default function Home() {
                                     <div
                                         className={`flex flex-col md:flex-row lg:flex-row xl:flex-row glow:opacity-100 glow:text-glow/100`}>
                                         <img
-                                            className={`${item.imageOptions} w-full rounded-t-lg h-96 ${projectHover === index ? 'opacity-70' : 'opacity-50'} md:h-auto md:w-48 md:rounded-none md:rounded-s-lg glow:opacity-100 glow:text-glow/100`}
+                                            className={`${item.imageOptions} w-full rounded-t-lg h-96 transition duration-300 ${projectHover === index || stickyHeaders.projects ? 'opacity-70' : 'opacity-50'} md:h-auto md:w-48 md:rounded-none md:rounded-s-lg glow:opacity-100 glow:text-glow/100`}
                                             src={item.imageUrl} alt=""/>
                                         <div className="flex flex-col items-center glow:text-glow">
                                             <div
-                                                className={`flex flex-col justify-between p-4 leading-normal ${projectHover === index ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
-                                                <h5 className={`text-md font-bold tracking-normal ${projectHover === index ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
+                                                className={`flex flex-col justify-between p-4 leading-normal transition duration-300 ${projectHover === index || stickyHeaders.projects ? 'opacity-100' : 'opacity-50'} glow:opacity-100 glow:text-glow/50`}>
+                                                <h5 className={`text-md font-bold tracking-normal transition duration-300 ${projectHover === index || stickyHeaders.projects ? 'text-blue-400 opacity-70' : 'text-white'} lg:hover:text-blue-400 glow:opacity-100 glow:text-glow/50`}>
                                                     {item.Name}
                                                 </h5>
                                                 <p className="text-sm italic mb-2">{item.date}</p>
@@ -474,7 +533,7 @@ export default function Home() {
                                                         {item.skills.map((skill) => (
                                                             <span
                                                                 key={skill}
-                                                                className={` m-1 inline-block ${projectHover === index ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
+                                                                className={` m-1 inline-block transition duration-300 ${projectHover === index || stickyHeaders.projects ? 'bg-blue-400 text-white opacity-100' : 'text-white'} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 mb-2 glow:opacity-100 glow:text-glow/50 select-none`}
                                                             >{skill}
                                             </span>
                                                         ))
@@ -482,7 +541,7 @@ export default function Home() {
                                                     </div>
                                                 </div>
                                                 <a href={item.link}
-                                                   className={`mt-5 inline-flex items-center ${projectHover === index ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
+                                                   className={`mt-5 inline-flex items-center transition duration-300 ${projectHover === index || stickyHeaders.projects ? 'text-blue-400 underline underline-offset-8 hover:decoration-dashed' : 'text-white'} glow:opacity-100 glow:text-glow/50 select-none`}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                                                          fill="currentColor" className="size-4">
                                                         <path fillRule="evenodd"
@@ -517,7 +576,7 @@ export default function Home() {
                 {/* blog */}
                 <section id="blog" className="mt-[180px]" ref={el => sectionsRef.current[3] = el}>
                     <div
-                        className="lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4">
+                        className={`lg:hidden sticky top-0 z-20  bg-gradient-to-r from-[#111111]/75 to-[#232323]/75 backdrop-blur py-3 px-4 transition duration-300 ${stickyHeaders.blog ? 'bg-opacity-100 text-white' : 'bg-opacity-50 text-gray-300'}`}>
                         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">
                             Blogs
                         </h1>
@@ -535,9 +594,9 @@ export default function Home() {
                                 >
                                     <Glow color='white'>
                                         <div
-                                            className={`glow:opacity-100 glow:text-glow glow:text-glow/100 ${blogHover === index ? 'opacity-100' : 'opacity-50'}`}>
+                                            className={`glow:opacity-100 glow:text-glow glow:text-glow/100 transition duration-300 ${blogHover === index || stickyHeaders.blog ? 'opacity-100' : 'opacity-50'}`}>
                                             <a href="#">
-                                                <h5 className={`mb-2 text-2xl font-bold tracking-tight ${blogHover === index ? 'text-blue-400 opacity-70' : 'text-white'} glow:opacity-100 glow:text-glow/50`}>{item.data.title}</h5>
+                                                <h5 className={`mb-2 text-2xl font-bold tracking-tight transition duration-300 ${blogHover === index || stickyHeaders.blog ? 'text-blue-400 opacity-70' : 'text-white'} glow:opacity-100 glow:text-glow/50`}>{item.data.title}</h5>
                                             </a>
                                             <p className="text-clip mb-3 font-normal text-gray-700 dark:text-gray-400 glow:opacity-100 glow:text-glow/50">{item.data.date}</p>
                                             <p className="mb-3 mr-4 font-normal text-justify text-gray-300 glow:opacity-100 glow:text-glow/50 line-clamp-2">{item.data.smdesc}</p>
