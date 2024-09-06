@@ -95,6 +95,16 @@ export default function Home() {
 
     const experienceItems = [
         {
+            dateFrom: '2024',
+            dateTo: 'Present',
+            position: '\n' +
+                'Teaching Assistant (CS250 - Computer Architecture)',
+            place: 'Purdue University',
+            desc: 'Evaluate projects, support students in office hours and forums, and lead lab sessions for homework and exam prep.',
+            skills: ['Teaching', 'Assembly', 'Circuits', 'Hardware Architecture'],
+            link: 'https://www.cs.purdue.edu/'
+        },
+        {
             dateFrom: '2022',
             dateTo: 'Present',
             position: 'Customer Service Assistant',
