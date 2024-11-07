@@ -136,7 +136,7 @@ export default function Home() {
             link: 'https://www.alesgsanudoo.com/'
         },
         {
-            imageUrl: 'https://camo.githubusercontent.com/e90b9174d66add0b2211af7d438331882bb4764317741cddc2b44517b15c6fdb/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
+            imageUrl: 'https://camo.githubusercontent.com/278a4560e6139573c604cfdd07fa949c90a120256a6e6bffdf536e051791da10/68747470733a2f2f696d6775722e636f6d2f6a79674c6d39442e706e67',
             imageOptions: 'object-cover',
             date: 'May 2024',
             Name: 'SnapBattle',
@@ -145,7 +145,7 @@ export default function Home() {
             link: 'https://github.com/CSGrinders/SnapBattle'
         },
         {
-            imageUrl: 'https://camo.githubusercontent.com/587d48b8e6f19d1e562c4e8510dce16471229914ec9f362d4ae14f5613cf42ae/68747470733a2f2f692e696d6775722e636f6d2f375a4b6d6d57432e706e67',
+            imageUrl: 'https://camo.githubusercontent.com/8f6e1cb939f95cf6db1dcee1cd1cfead1e2909670482993cdd9406f317f974f2/68747470733a2f2f692e696d6775722e636f6d2f375a4b6d6d57432e706e67',
             imageOptions: 'object-cover object-left',
             date: 'June 2023',
             Name: 'MyBetterCSPlan',

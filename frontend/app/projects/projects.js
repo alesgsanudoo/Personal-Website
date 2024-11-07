@@ -17,6 +17,13 @@ export default function Project() {
 
     const projectsItems = [
         {
+            date: 'October 2024',
+            Name: 'My Subs',
+            tech: ['React', 'Next.js', 'JavaScript', 'TailwindCSS', 'MongoDB'],
+            link: 'https://github.com/alesgsanudoo/mySubs',
+            view: 'https://mysubs.alesgsanudoo.com/',
+        },
+        {
             date: 'June 2024',
             Name: 'Personal Website V2',
             tech: ['React', 'Next.js', 'JavaScript', 'TailwindCSS'],
